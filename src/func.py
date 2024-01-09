@@ -33,14 +33,15 @@ def extract_content(question_id, text):
 
     return text[start:end]
 
-import openai
-def call_gpt(prompt, question_id=None, model="gpt-3.5-turbo", temperature=0.5):
+def call_gpt(client, prompt, model="gpt-3.5-turbo", temperature=0.1):
+    
     system_msg = f"""
     Find the question in the following text. Just returns the question.
+    If the is like "Have you done any of these activities in the last month?",
+    also returns the answer options.
     """
-    completion = openai.ChatCompletion.create(model="gpt-3.5-turbo",
-                                            messages=[{"role": "system", "content": system_msg},
+    completion = client.chat.completions.create(model=model,
+                                                messages=[{"role": "system", "content": system_msg},
                                                         {"role": "user", "content": prompt}],
-                                              temperature=temperature)
-    output = completion["choices"][0]["message"]["content"]
-    return output
+                                                temperature=temperature)
+    return completion.choices[0].message.content
