@@ -9,7 +9,7 @@ try:
     # load the questionnaire
     df = pd.read_csv('data/doc.csv')
 
-    st.title("From question id to question")
+    st.title("ChereDoc: from question id to question")
     st.markdown("##### This web page is a tool to find the question corresponding to a question id in the [SHARE](https://share-eric.eu/) Survey. To use it, choose a wave and a question id, then click on `Run`. For the moment, the app only covers English questionnaires from the waves 1 to 8.")
     st.markdown("##### Our app get all columns from the datasets and search in the documentation to find the question corresponding to the question id. However, not all columns are explicit questions: most valid questions have the form `ab012_`.")
     space(2)
